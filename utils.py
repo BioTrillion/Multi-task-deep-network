@@ -81,11 +81,11 @@ def create_train_arg_parser():
         default="dist_signed",
         help="select distance transform type - dist_mask,dist_contour,dist_signed",
     )
-    parser.add_argument("--batch_size", type=int, default=4, help="train batch size")
+    parser.add_argument("--batch_size", type=int, default=16, help="train batch size")
     parser.add_argument(
         "--val_batch_size", type=int, default=4, help="validation batch size"
     )
-    parser.add_argument("--num_epochs", type=int, default=150, help="number of epochs")
+    parser.add_argument("--num_epochs", type=int, default=200, help="number of epochs")
     parser.add_argument("--cuda_no", type=int, default=0, help="cuda number")
     parser.add_argument(
         "--use_pretrained", type=bool, default=False, help="Load pretrained checkpoint."

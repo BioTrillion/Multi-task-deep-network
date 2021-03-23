@@ -28,10 +28,10 @@ class DatasetImageMaskContourDist(Dataset):
         img_file_name = self.file_names[idx]
         image = load_image(img_file_name)
         mask = load_mask(img_file_name)
-        contour = load_contour(img_file_name)
-        dist = load_distance(img_file_name, self.distance_type)
+        # contour = load_contour(img_file_name)
+        # dist = load_distance(img_file_name, self.distance_type)
 
-        return img_file_name, image, mask, contour, dist
+        return img_file_name, image, # mask, contour, dist
 
 
 def load_image(path):
@@ -39,7 +39,7 @@ def load_image(path):
     img = Image.open(path)
     data_transforms = transforms.Compose(
         [
-            transforms.Resize(256),
+            transforms.Resize((256, 256)),
             transforms.ToTensor(),
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
         ]
@@ -68,15 +68,15 @@ def load_contour(path):
 def load_distance(path, distance_type):
 
     if distance_type == "dist_mask":
-        path = path.replace("image", "dist_mask").replace("jpg", "mat")
+        path = path.replace("image", "dist_mask").replace("jpg", "mat").replace("png", "mat")
         dist = io.loadmat(path)["mask_dist"]
 
     if distance_type == "dist_contour":
-        path = path.replace("image", "dist_contour").replace("jpg", "mat")
+        path = path.replace("image", "dist_contour").replace("jpg", "mat").replace("png", "mat")
         dist = io.loadmat(path)["contour_dist"]
 
     if distance_type == "dist_signed":
-        path = path.replace("image", "dist_signed").replace("jpg", "mat")
+        path = path.replace("image", "dist_signed").replace("jpg", "mat").replace("png", "mat")
         dist = io.loadmat(path)["dist_norm"]
 
     return torch.from_numpy(np.expand_dims(dist, 0)).float()

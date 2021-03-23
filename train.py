@@ -43,9 +43,9 @@ def build_model(model_type):
     if model_type == "dmtn":
         model = UNet_DMTN(num_classes=2)
     if model_type == "psinet":
-        model = PsiNet(num_classes=2)
+        model = PsiNet(num_classes=3)
     if model_type == "convmcd":
-        model = UNet_ConvMCD(num_classes=2)
+        model = UNet_ConvMCD(num_classes=3)
 
     return model
 
@@ -114,9 +114,9 @@ if __name__ == "__main__":
     )
     logging.info("")
 
-    train_file_names = glob.glob(os.path.join(args.train_path, "*.jpg"))
+    train_file_names = glob.glob(os.path.join(args.train_path, "*.png"))
     random.shuffle(train_file_names)
-    val_file_names = glob.glob(os.path.join(args.val_path, "*.jpg"))
+    val_file_names = glob.glob(os.path.join(args.val_path, "*.png"))
 
     device = torch.device(CUDA_SELECT if torch.cuda.is_available() else "cpu")
     model = build_model(args.model_type)

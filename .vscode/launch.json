@@ -1,0 +1,41 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args":[
+                // Training
+                "--train_path",
+                "E:\\Data\\training_set\\iPhone_BT_12thMarch21_80_split\\image", 
+                "--val_path",
+                "E:\\Data\\val_set\\iPhone_BT_12thMarch21_10_split\\image", 
+                "--model_type", 
+                "convmcd",
+                "--object_type" ,
+                "polyp",
+                "--distance_type",
+                "dist_contour",
+                "--save_path",
+                "E:\\Source\\Multi-task-deep-network\\models"
+
+                // Validation (Testing)
+                "--model_type",
+                "convmcd",
+                "--val_path",
+                // "E:\\Data\\test_set\\iPhone_BT_12thMarch21_10_split\\image",
+                "E:\\Data\\V7 Annotations\\03_12_2021\\temp_test_set\\image",
+                "--model_file",
+                "E:\\Source\\Multi-task-deep-network\\models\\200.pt",
+                "--save_path",
+                "E:\\Source\\Multi-task-deep-network\\results\\conv_mcd_3_15_21_temp_test_set"
+            ]
+        }
+    ]
+}
